@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class playercontroller : MonoBehaviour
 {
+    public float speed = 0;
 
     private Rigidbody rb;
     private float movementX;
@@ -29,6 +30,15 @@ public class playercontroller : MonoBehaviour
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
 
 
-        rb.AddForce(movement);
+        rb.AddForce(movement * speed);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("PickUp"))
+        {
+            other.gameObject.SetActive(false);
+
+        }
     }
 }
